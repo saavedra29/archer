@@ -1,3 +1,6 @@
+-- Configuring variables
+GRAVITY = 10
+
 
 -- The first element is registered CRAFTITEM and the second registered ENTITY
 arrows = {
@@ -22,7 +25,7 @@ local archer_shoot_arrow = function(itemstack, player)
 			local dir = player:get_look_dir()
 			-- Set velocity, acceleration and orientation of the arrow
 			obj:setvelocity({x=dir.x*19, y=dir.y*19, z=dir.z*19})
-			obj:setacceleration({x=dir.x*-3, y=-10, z=dir.z*-3})
+			obj:setacceleration({x=dir.x*-3, y=-GRAVITY, z=dir.z*-3})
 			obj:setyaw(player:get_look_yaw()+math.pi)
 			-- Play sound
 			minetest.sound_play("archer_sound", {pos=playerpos, gain = 0.5})
@@ -76,7 +79,7 @@ minetest.register_tool("archer:bow_stone", {
 	description = "Stone Bow",
 	inventory_image = "archer_bow_stone.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if archer_shoot_arrow(item, user, pointed_thing) then
+		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
 				itemstack:add_wear(65535/90)
 			end
@@ -100,7 +103,7 @@ minetest.register_tool("archer:bow_steel", {
 	description = "Steel Bow",
 	inventory_image = "archer_bow_steel.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if archer_shoot_arrow(item, user, pointed_thing) then
+		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
 				itemstack:add_wear(65535/200)
 			end
@@ -125,7 +128,7 @@ minetest.register_tool("archer:bow_bronze", {
 	inventory_image = "archer_bow_bronze.png",
     stack_max = 1,
 	on_use = function(itemstack, user, pointed_thing)
-		if archer_shoot_arrow(item, user, pointed_thing) then
+		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
 				itemstack:add_wear(65535/220)
 			end
@@ -149,7 +152,7 @@ minetest.register_tool("archer:bow_mese", {
 	description = "Mese Bow",
 	inventory_image = "archer_bow_mese.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if archer_shoot_arrow(item, user, pointed_thing) then
+		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
 				itemstack:add_wear(65535/350)
 			end
@@ -173,7 +176,7 @@ minetest.register_tool("archer:bow_diamond", {
 	description = "Diamond Bow",
 	inventory_image = "archer_bow_diamond.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if archer_shoot_arrow(item, user, pointed_thing) then
+		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
 				itemstack:add_wear(65535/500)
 			end
