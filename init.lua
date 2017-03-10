@@ -26,7 +26,7 @@ local archer_shoot_arrow = function(itemstack, player)
 			-- Set velocity, acceleration and orientation of the arrow
 			obj:setvelocity({x=dir.x*19, y=dir.y*19, z=dir.z*19})
 			obj:setacceleration({x=dir.x*-3, y=-GRAVITY, z=dir.z*-3})
-			obj:setyaw(player:get_look_yaw()+math.pi)
+			obj:setyaw(player:get_look_horizontal()+math.pi)
 			-- Play sound
 			minetest.sound_play("archer_sound", {pos=playerpos, gain = 0.5})
 			-- Probably: If the arrow is taken from the ground..
