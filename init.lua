@@ -25,9 +25,9 @@ local archer_shoot_arrow = function(itemstack, player)
 			-- Get the player's direction
 			local dir = player:get_look_dir()
 			-- According to the player's hp we have different arrow velocity
-			local endVelocity = player:get_hp() * 0.05 * VELOCITY
+			local endVelocity = VELOCITY*(1-4^(-player:get_hp()/7))
 			print("hp: " .. player:get_hp() .. "\nvelocity: " .. VELOCITY)
-			print("endVelocity = " .. player:get_hp() * 0.05 * VELOCITY)
+			print("\nendVelocity = " .. endVelocity)
 			-- Set velocity, acceleration and orientation of the arrow
 			obj:setvelocity({x=dir.x*endVelocity, y=dir.y*endVelocity, z=dir.z*endVelocity})
 			obj:setacceleration({x=dir.x*-3, y=-GRAVITY, z=dir.z*-3})
