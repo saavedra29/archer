@@ -57,10 +57,6 @@ ARCHER_ARROW_ENTITY.on_step = function(self, dtime)
 		for k, obj in pairs(objs) do
 			-- If the object is not player..
 			if obj:get_luaentity() ~= nil then
-				-- -- DEBUG
-				-- if obj:get_luaentity().name == "default:obsidian" then
-				-- 	print("--------HEATING THE TARGET!---------")
-				-- end
 				-- If the object is not arrow && is not something thrown down..
 				if obj:get_luaentity().name ~= "archer:arrow_entity" and obj:get_luaentity().name ~= "__builtin:item" then
 					local damage = 1

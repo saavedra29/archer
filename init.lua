@@ -24,10 +24,9 @@ local archer_shoot_arrow = function(itemstack, player)
 			local obj = minetest.add_entity({x=playerpos.x,y=playerpos.y+1.5,z=playerpos.z}, arrow[2])
 			-- Get the player's direction
 			local dir = player:get_look_dir()
-			-- According to the player's hp we have different arrow velocity
+			-- The endVelocity (actual velocity) raises exponentially according to the bow's
+			-- material and the player's hitpoints
 			local endVelocity = VELOCITY*(1-4^(-player:get_hp()/7))
-			print("hp: " .. player:get_hp() .. "\nvelocity: " .. VELOCITY)
-			print("\nendVelocity = " .. endVelocity)
 			-- Set velocity, acceleration and orientation of the arrow
 			obj:setvelocity({x=dir.x*endVelocity, y=dir.y*endVelocity, z=dir.z*endVelocity})
 			obj:setacceleration({x=dir.x*-3, y=-GRAVITY, z=dir.z*-3})
