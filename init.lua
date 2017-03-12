@@ -84,10 +84,10 @@ minetest.register_tool("archer:bow_stone", {
 	description = "Stone Bow",
 	inventory_image = "archer_bow_stone.png",
 	on_use = function(itemstack, user, pointed_thing)
-		VELOCITY = 20
+		VELOCITY = 18
 		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/90)
+				itemstack:add_wear(65535/60)
 			end
 		end
 		return itemstack
@@ -109,10 +109,10 @@ minetest.register_tool("archer:bow_steel", {
 	description = "Steel Bow",
 	inventory_image = "archer_bow_steel.png",
 	on_use = function(itemstack, user, pointed_thing)
-		VELOCITY = 25
+		VELOCITY = 21
 		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/200)
+				itemstack:add_wear(65535/100)
 			end
 		end
 		return itemstack
@@ -135,10 +135,10 @@ minetest.register_tool("archer:bow_bronze", {
 	inventory_image = "archer_bow_bronze.png",
     stack_max = 1,
 	on_use = function(itemstack, user, pointed_thing)
-		VELOCITY = 27
+		VELOCITY = 22
 		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/220)
+				itemstack:add_wear(65535/120)
 			end
 		end
 		return itemstack
@@ -160,10 +160,10 @@ minetest.register_tool("archer:bow_mese", {
 	description = "Mese Bow",
 	inventory_image = "archer_bow_mese.png",
 	on_use = function(itemstack, user, pointed_thing)
-		VELOCITY = 32
+		VELOCITY = 25
 		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/350)
+				itemstack:add_wear(65535/200)
 			end
 		end
 		return itemstack
@@ -185,10 +185,10 @@ minetest.register_tool("archer:bow_diamond", {
 	description = "Diamond Bow",
 	inventory_image = "archer_bow_diamond.png",
 	on_use = function(itemstack, user, pointed_thing)
-		VELOCITY = 37
+		VELOCITY = 28
 		if archer_shoot_arrow(itemstack, user, pointed_thing) then
 			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/500)
+				itemstack:add_wear(65535/300)
 			end
 		end
 		return itemstack
