@@ -4,11 +4,22 @@ This is a Minetest mod of bows and arrows. It is based on https://forum.minetest
 Changes:
 --------
 
- 
-
  - Non realistic arrows removed
 
+
+
+ - Every different bow type has different velocity that comes from a
+   formula containing: 
+   
+   	 1.bow's velocity factor  
+   	 2.player's hitpoint at the specific time   
+   	 This works exponentially although a little smoothed. So the less hitpoints the player has the less the velocity of the arrow.
+
  
+
+ - Minimum time delay added between shots
+
+
 
  - Comments added
 
@@ -26,14 +37,3 @@ Changes:
 
  
 
- - Every different bow type has different velocity that comes from a
-   formula containing: 
-   
-   	 1.bow's velocity factor  
-   	 2.player's hitpoint at the specific time   
-   	 This works exponentially although a little smoothed. So the less hitpoints the player has the less the velocity of the arrow.
-
-TODO:
--------
-
- - Create interval between uses of the bow. For example shoot only after 2 seconds have passed before previous shooting.

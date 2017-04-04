@@ -18,6 +18,11 @@ BRONZE_BOW_DURABILITY = 100
 MESE_BOW_DURABILITY = 150
 DIAMOND_BOW_DURABILITY = 200
 
+SHOOTING_DELAY = 1.2
+
+local playersStates = {}
+
+
 -- The first element is registered CRAFTITEM and the second registered ENTITY
 arrows = {
 	{"archer:arrow", "archer:arrow_entity"},
@@ -61,6 +66,21 @@ local archer_shoot_arrow = function(itemstack, player)
 	return false
 end
 
+-- Checks if the time delay has passed between shots
+local readyToShoot = function(player)
+	local name = player:get_player_name()
+	if playersStates[name] == nil or playersStates[name] == true then
+		playersStates[name] = false
+		minetest.after(SHOOTING_DELAY, function(name)
+			playersStates[name] = true
+		end, name)
+		return true
+	else
+		return false
+	end
+end
+
+
 
 -- Register the item
 minetest.register_tool("archer:bow_wood", {
@@ -69,11 +89,13 @@ minetest.register_tool("archer:bow_wood", {
 	-- The function to be called when the arrow is used
 	on_use = function(itemstack, user, pointed_thing)
 		VELOCITY = WOODEN_BOW_VELOCITY
-		-- If the player has arrow in his inventory..
-		if archer_shoot_arrow(itemstack, user, pointed_thing) then
-			-- If we are not in creative mode add wear to the bow
-			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/WOODEN_BOW_DURABILITY)
+		-- Check if 2 seconds have passed since last shot
+		if readyToShoot(user) then
+			if archer_shoot_arrow(itemstack, user, pointed_thing) then
+				-- If we are not in creative mode add wear to the bow
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:add_wear(65535/WOODEN_BOW_DURABILITY)
+				end
 			end
 		end
 		return itemstack
@@ -100,9 +122,11 @@ minetest.register_tool("archer:bow_stone", {
 	inventory_image = "archer_bow_stone.png",
 	on_use = function(itemstack, user, pointed_thing)
 		VELOCITY = STONE_BOW_VELOCITY
-		if archer_shoot_arrow(itemstack, user, pointed_thing) then
-			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/STONE_BOW_DURABILITY)
+		if readyToShoot(user) then
+			if archer_shoot_arrow(itemstack, user, pointed_thing) then
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:add_wear(65535/STONE_BOW_DURABILITY)
+				end
 			end
 		end
 		return itemstack
@@ -125,9 +149,11 @@ minetest.register_tool("archer:bow_steel", {
 	inventory_image = "archer_bow_steel.png",
 	on_use = function(itemstack, user, pointed_thing)
 		VELOCITY = STEEL_BOW_VELOCITY
-		if archer_shoot_arrow(itemstack, user, pointed_thing) then
-			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/STEEL_BOW_DURABILITY)
+		if readyToShoot(user) then
+			if archer_shoot_arrow(itemstack, user, pointed_thing) then
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:add_wear(65535/STEEL_BOW_DURABILITY)
+				end
 			end
 		end
 		return itemstack
@@ -151,9 +177,11 @@ minetest.register_tool("archer:bow_bronze", {
     stack_max = 1,
 	on_use = function(itemstack, user, pointed_thing)
 		VELOCITY = BRONZE_BOW_VELOCITY
-		if archer_shoot_arrow(itemstack, user, pointed_thing) then
-			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/BRONZE_BOW_DURABILITY)
+		if readyToShoot(user) then
+			if archer_shoot_arrow(itemstack, user, pointed_thing) then
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:add_wear(65535/BRONZE_BOW_DURABILITY)
+				end
 			end
 		end
 		return itemstack
@@ -176,9 +204,11 @@ minetest.register_tool("archer:bow_mese", {
 	inventory_image = "archer_bow_mese.png",
 	on_use = function(itemstack, user, pointed_thing)
 		VELOCITY = MESE_BOW_VELOCITY
-		if archer_shoot_arrow(itemstack, user, pointed_thing) then
-			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/MESE_BOW_DURABILITY)
+		if readyToShoot(user) then
+			if archer_shoot_arrow(itemstack, user, pointed_thing) then
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:add_wear(65535/MESE_BOW_DURABILITY)
+				end
 			end
 		end
 		return itemstack
@@ -201,9 +231,11 @@ minetest.register_tool("archer:bow_diamond", {
 	inventory_image = "archer_bow_diamond.png",
 	on_use = function(itemstack, user, pointed_thing)
 		VELOCITY = DIAMOND_BOW_VELOCITY
-		if archer_shoot_arrow(itemstack, user, pointed_thing) then
-			if not minetest.setting_getbool("creative_mode") then
-				itemstack:add_wear(65535/DIAMOND_BOW_DURABILITY)
+		if readyToShoot(user) then
+			if archer_shoot_arrow(itemstack, user, pointed_thing) then
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:add_wear(65535/DIAMOND_BOW_DURABILITY)
+				end
 			end
 		end
 		return itemstack
