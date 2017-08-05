@@ -109,6 +109,6 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "archer:arrow 16",
 	recipe = {
-		{"group:stick", "group:stick", "default:default:cobble"},
+		{"group:stick", "group:stick", "default:cobble"},
 	}
 })
